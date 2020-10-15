@@ -79,17 +79,21 @@ class Game {
         var x;
         var y;
         var angle;
-        var velocity;
+        var velocity = 0;
         //index of the array
         var index = 0;
   
         for(var plr in allPlayers){
           //add 1 to the index for every loop
           index = index + 1 ;
+
+          players[index-1].collide(leftWall.wall);
+          players[index-1].collide(rightWall.wall);
+          players[index-1].collide(topWall.wall);
+          players[index-1].collide(bottomWall.wall);
+          players[index-1].collide(rock);
   
           //position the cars a little away from each other in x direction
-          x = allPlayers[plr].x;
-          y = allPlayers[plr].y;
           angle = allPlayers[plr].angle;
           velocity = allPlayers[plr].velocity;
           //use data form the database to display the cars in y direction
@@ -111,15 +115,18 @@ class Game {
           }
           */
 
-          players[index-1].x = x;
-          players[index-1].y = y;
-          players[index-1].velocityY = velocity;
+          x = players[index-1].x;
+          y = players[index-1].y;
+          players[index-1].velocityY = player.velocity;
           player.x = x;
           player.y = y;
           player.velocity = velocity;
+          //console.log(players[3].velocityY);
           push();
           players[index-1].rotation = angle;
           pop();
+          x = allPlayers[plr].x;
+          y = allPlayers[plr].y;
          // console.log(index, player.index)
   
          
@@ -156,11 +163,13 @@ class Game {
         player.update();
       }
       */
-      if(keyCode === 32 && player.index !== null){
+      if(keyIsDown(32) && player.index !== null){
         player.velocity = 3;
+        player.update();
       }
-      if(!(keyCode === 32) && player.index !== null){
+      if(!(keyIsDown(32)) && player.index !== null){
         player.velocity = 0;
+        player.update();
       }
       if(keyDown(LEFT_ARROW) && player.index !== null){
         player.angle -= 5;
