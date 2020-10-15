@@ -28,7 +28,8 @@ class Player {
         name:this.name,
         x:this.x,
         y:this.y,
-        angle:this.angle
+        angle:this.angle,
+        velocity:this.velocity
       });
     }
   
