@@ -62,6 +62,7 @@ class Game {
       rock = createSprite(200,200);
       rock.addImage("rock",rockIMG);
       rock.scale = 0.05;
+      rock.debug = true;
 
       createEdgeSprites();
     }
@@ -96,6 +97,7 @@ class Game {
           //position the cars a little away from each other in x direction
           angle = allPlayers[plr].angle;
           velocity = allPlayers[plr].velocity;
+         
           //use data form the database to display the cars in y direction
           //y = displayHeight - allPlayers[plr].distance;
           /*
@@ -114,19 +116,16 @@ class Game {
             }
           }
           */
-
-          x = players[index-1].x;
-          y = players[index-1].y;
+          player.velocity = velocity;
+          players[index-1].x = x;
+          players[index-1].y = y;
           players[index-1].velocityY = player.velocity;
           player.x = x;
           player.y = y;
-          player.velocity = velocity;
           //console.log(players[3].velocityY);
           push();
           players[index-1].rotation = angle;
           pop();
-          x = allPlayers[plr].x;
-          y = allPlayers[plr].y;
          // console.log(index, player.index)
   
          
